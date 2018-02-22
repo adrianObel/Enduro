@@ -11,7 +11,6 @@ const enduro_server = function () {}
 // * vendor dependencies
 const express = require('express')
 const app = express()
-const session = require('express-session')
 const cors = require('cors')
 const multiparty_middleware = require('connect-multiparty')()
 const cookieParser = require('cookie-parser')
@@ -27,12 +26,6 @@ const brick_handler = require(enduro.enduro_path + '/libs/bricks/brick_handler')
 
 // initialization of the sessions
 app.set('trust proxy', 1)
-app.use(session({
-	secret: 'keyboard cat',
-	resave: false,
-	saveUninitialized: true,
-	cookie: {},
-}))
 
 app.use(cookieParser())
 app.use(bodyParser.json())

@@ -8,7 +8,6 @@
 const api_call = function () {}
 
 // * enduro dependencies
-const admin_sessions = require(enduro.enduro_path + '/libs/admin_utilities/admin_sessions')
 
 // routed call
 api_call.prototype.call = function (req, res, enduro_server) {
@@ -21,9 +20,6 @@ api_call.prototype.call = function (req, res, enduro_server) {
 		res.send({success: false, message: 'no sessionid provided'})
 		return
 	}
-
-	// check for session
-	admin_sessions.logout_by_session(sid)
 
 	res.send({success: true})
 }
