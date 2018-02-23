@@ -24,7 +24,7 @@ admin_sessions.prototype.create_session = function (req, user) {
 			exp: moment().add(TOKEN_EXPIRATION, 'hours').unix()
 		}
 
-		jwt.sign(payload, 'secret', (err, token) => {
+		jwt.sign(payload, enduro.config.variables.TOKEN_SECRET, (err, token) => {
 			if (err) { return reject(err) }
 
 			resolve({
@@ -41,7 +41,7 @@ admin_sessions.prototype.get_user_by_session = function (token) {
 	return new Promise((resolve, reject) => {
 		if (!token) { return reject('session doesn\'t exist') }
 
-		jwt.verify(token, 'secret', (err, decoded) => {
+		jwt.verify(token, enduro.config.variables.TOKEN_SECRET, (err, decoded) => {
 			if (err) { return reject('session expired') }
 
 			resolve(admin_security.get_user_by_username(decoded.username))
