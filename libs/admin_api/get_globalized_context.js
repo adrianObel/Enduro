@@ -20,7 +20,7 @@ const globalizer_helpers = require(enduro.enduro_path + '/libs/globalizer/global
 api_call.prototype.call = function (req, res, enduro_server) {
 
 	// gets query parameters
-	const sid = req.query.sid
+	const sid = req.headers.sid
 	const globalizer_string = req.query.globalizer_string
 	const page_path = req.query.page_path
 

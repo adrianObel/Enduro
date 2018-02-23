@@ -17,7 +17,7 @@ const format_service = require(enduro.enduro_path + '/libs/services/format_servi
 api_call.prototype.call = function (req, res, enduro_server) {
 
 	// gets query parameters
-	const sid = req.query.sid
+	const sid = req.headers.sid
 	const filename = req.query.filename
 
 	// checks if all required parameters had been received

@@ -20,7 +20,7 @@ api_call.prototype.call = function (req, res, enduro_server) {
 	logger.timestamp('Trying to delete page' + pagename, 'page_manipulation')
 
 	// checks if user is logged in
-	admin_sessions.get_user_by_session(req.query.sid)
+	admin_sessions.get_user_by_session(req.headers.sid)
 		.then((user) => {
 			logger.timestamp(user + 'is trying to delete page ' + pagename, 'page_manipulation')
 			return page_adding_service.delete_page(pagename)

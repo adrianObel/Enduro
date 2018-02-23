@@ -107,8 +107,10 @@ describe('Globalizer - api endpoints', function () {
 		return request({
 				url: 'http://localhost:5000/admin_api/get_globalizer_options',
 				qs: {
-					sid: sid,
 					globalizer_string: '@@global.fake_nesting.toys.mindstorms',
+				},
+				headers: {
+					sid: sid
 				}
 			})
 			.then((globalizer_options) => {
@@ -125,9 +127,11 @@ describe('Globalizer - api endpoints', function () {
 		return request({
 				url: 'http://localhost:5000/admin_api/get_globalizer_options',
 				qs: {
-					sid: sid,
 					globalizer_string: '@@local_fake_options.car',
 					page_path: '/index',
+				},
+				headers: {
+					sid: sid
 				}
 			})
 			.then((globalizer_options) => {
@@ -144,9 +148,11 @@ describe('Globalizer - api endpoints', function () {
 		return request({
 				url: 'http://localhost:5000/admin_api/get_globalized_context',
 				qs: {
-					sid: sid,
 					globalizer_string: '@@local_fake_options.car',
 					page_path: '/index',
+				},
+				headers: {
+					sid: sid
 				}
 			})
 			.then((globalizer_options) => {
