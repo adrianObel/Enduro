@@ -1,6 +1,7 @@
 {
 	"project_name": "set name here",
 	"project_slug": "sn",
+	"token_secret": "secret_cat",
 	"s3": {
 		"bucket": "enduro.sethere",
 		"region": "eu-west-1"
