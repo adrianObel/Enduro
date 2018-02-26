@@ -15,7 +15,7 @@ const admin_rights = require(enduro.enduro_path + '/libs/admin_utilities/admin_r
 // routed call
 api_call.prototype.call = function (req, res, enduro_server) {
 	logger.timestamp('Trying to upload a file', 'file_uploading')
-	admin_sessions.get_user_by_session(req.body.sid)
+	admin_sessions.get_user_by_session(req.headers.sid)
 		.then((user) => {
 
 			if (!admin_rights.can_user_do_that(user, 'write')) {

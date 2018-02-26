@@ -15,6 +15,7 @@ const session = require('express-session')
 const cors = require('cors')
 const multiparty_middleware = require('connect-multiparty')()
 const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
 
 // * enduro dependencies
 const admin_api = require(enduro.enduro_path + '/libs/admin_api')
@@ -34,7 +35,7 @@ app.use(session({
 }))
 
 app.use(cookieParser())
-
+app.use(bodyParser.json())
 app.use(cors())
 
 // add enduro.js header

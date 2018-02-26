@@ -12,7 +12,7 @@ const admin_sessions = require(enduro.enduro_path + '/libs/admin_utilities/admin
 // routed call
 api_call.prototype.call = function (req, res, enduro_server) {
 
-	admin_sessions.get_user_by_session(req.query.sid)
+	admin_sessions.get_user_by_session(req.headers.sid)
 		.then((user) => {
 			// returns the cultures without the last, empty culture
 			if (enduro.config.cultures.length > 1) {

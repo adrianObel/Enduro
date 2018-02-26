@@ -25,15 +25,15 @@ describe('admin api', function () {
 	})
 
 	it('should be able to login with password', function (done) {
-		request.get({
+		request.post({
 			url: 'http://localhost:5000/admin_api/login_by_password',
-			qs: {username: 'gottwik', password: '123'}
+			json: {username: 'gottwik', password: '123'}
 		}, function (error, response, body) {
 			if (error) { console.log(error) }
-			const res = JSON.parse(body)
-			expect(res.success).to.be.ok
-			expect(res).to.have.all.keys('success', 'username', 'sid', 'created', 'expires_at')
-			sid = res.sid
+
+			expect(body.success).to.be.ok
+			expect(body).to.have.all.keys('success', 'username', 'sid', 'created', 'expires_at')
+			sid = body.sid
 			done()
 		})
 	})
@@ -41,7 +41,7 @@ describe('admin api', function () {
 	it('should be able to get cms list', function (done) {
 		request.get({
 			url: 'http://localhost:5000/admin_api/get_cms_list',
-			qs: {sid: sid}
+			headers: {sid: sid}
 		}, function (error, response, body) {
 			if (error) { console.log(error) }
 			const res = JSON.parse(body)
@@ -53,7 +53,7 @@ describe('admin api', function () {
 	it('should be able to get admin_extension list', function (done) {
 		request.get({
 			url: 'http://localhost:5000/admin_api/get_admin_extensions',
-			qs: {sid: sid}
+			headers: {sid: sid}
 		}, function (error, response, body) {
 			if (error) { console.log(error) }
 			const res = JSON.parse(body)

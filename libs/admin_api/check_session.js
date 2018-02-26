@@ -15,7 +15,7 @@ const logger = require(enduro.enduro_path + '/libs/logger')
 api_call.prototype.call = function (req, res, enduro_server) {
 
 	// gets session id from query parameters
-	const sid = req.query.sid
+	const sid = req.headers.sid
 
 	// if no session provided
 	if (!sid) {

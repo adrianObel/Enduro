@@ -13,8 +13,8 @@ const logger = require(enduro.enduro_path + '/libs/logger')
 
 // routed call
 api_call.prototype.call = function (req, res, enduro_server) {
-	const username = req.query.username
-	const password = req.query.password
+	const username = req.body.username
+	const password = req.body.password
 
 	logger.timestamp(username + ' is trying to log in', 'admin_login')
 

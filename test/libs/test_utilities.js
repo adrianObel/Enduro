@@ -69,10 +69,9 @@ test_utilities.prototype.delete_testfolder = function () {
 test_utilities.prototype.get_sid = function () {
 	return request({
 		url: 'http://localhost:5000/admin_api/login_by_password',
-		qs: { username: 'gottwik', password: '123' }
+		json: { username: 'gottwik', password: '123' }
 	})
-		.then((body) => {
-			const res = JSON.parse(body)
+		.then((res) => {
 			if (res && res.success) {
 				return res.sid
 			} else {

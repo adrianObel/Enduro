@@ -13,7 +13,7 @@ const juicebox = require(enduro.enduro_path + '/libs/juicebox/juicebox')
 // routed call
 api_call.prototype.call = function (req, res, enduro_server) {
 
-	const sid = req.query.sid
+	const sid = req.headers.sid
 
 	admin_sessions.get_user_by_session(sid)
 		.then((user) => {
