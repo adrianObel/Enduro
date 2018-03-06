@@ -31,9 +31,9 @@ describe('admin api', function () {
 		}, function (error, response, body) {
 			if (error) { console.log(error) }
 
-			expect(res.success).to.be.ok
-			expect(res).to.have.all.keys('success', 'sid')
-			sid = res.sid
+			expect(body.success).to.be.ok
+			expect(body).to.have.all.keys('success', 'sid')
+			sid = body.sid
 
 			done()
 		})
