@@ -21,46 +21,35 @@ const temper = require(enduro.enduro_path + '/libs/temper/temper')
 
 // routed call
 api_call.prototype.call = function (req, res, enduro_server) {
+	// gets parameters from query
+	const sid = req.headers.sid
+	const filename = req.body.filename
+	const content = req.body.content
 
-	let jsonString = ''
-	req.on('data', function (data) {
-		jsonString += data
-	})
+	// makes sure all required query parameters were sent
+	if (!sid || !filename || !content) {
+		res.send({success: false, message: 'Parameters not provided'})
+		return logger.err('parameters not provided')
+	}
 
-	req.on('end', function () {
-
-		jsonString = JSON.parse(jsonString)
-
-		// gets parameters from query
-		const sid = jsonString.sid
-		const filename = jsonString.filename
-		const content = jsonString.content
-
-		// makes sure all required query parameters were sent
-		if (!sid || !filename || !content) {
-			res.send({success: false, message: 'Parameters not provided'})
-			return logger.err('parameters not provided')
-		}
-
-		admin_sessions.get_user_by_session(sid)
-			.then((user) => {
-				return temper.render(filename, content)
-			}, () => {
-				res.sendStatus(401)
-				throw new Error('abort promise chain')
-			})
-			.then((temp_page_in_raw_html) => {
-				const temp_filename = Math.random().toString(36).substring(7)
-				const temp_destination_url = path.join('t', temp_filename)
-				const temp_destination_path = path.join(enduro.project_path, enduro.config.build_folder, temp_destination_url + '/index.html')
-				flat_helpers.ensure_directory_existence(temp_destination_path)
-					.then(() => {
-						fs.writeFile(temp_destination_path, temp_page_in_raw_html, function () {
-							res.send(temp_destination_url)
-						})
+	admin_sessions.get_user_by_session(sid)
+		.then((user) => {
+			return temper.render(filename, content)
+		}, () => {
+			res.sendStatus(401)
+			throw new Error('abort promise chain')
+		})
+		.then((temp_page_in_raw_html) => {
+			const temp_filename = Math.random().toString(36).substring(7)
+			const temp_destination_url = path.join('t', temp_filename)
+			const temp_destination_path = path.join(enduro.project_path, enduro.config.build_folder, temp_destination_url + '/index.html')
+			flat_helpers.ensure_directory_existence(temp_destination_path)
+				.then(() => {
+					fs.writeFile(temp_destination_path, temp_page_in_raw_html, function () {
+						res.send(temp_destination_url)
 					})
-			}, () => {})
-	})
+				})
+		}, () => {})
 
 }
 
