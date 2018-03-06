@@ -1,6 +1,7 @@
 {
 	"project_name": "enduro test project",
 	"project_slug": "etp",
+	"token_secret": "secret_cat",
 	"s3": {
 		"bucket": "enduro.test",
 		"region": "eu-west-1"

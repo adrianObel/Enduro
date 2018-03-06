@@ -1,6 +1,7 @@
 {
 	"project_name": "enduro test",
 	"project_slug": "et",
+	"token_secret": "secret_cat",
 	"s3": {
 		"bucket": "enduro.sethere",
 		"region": "eu-west-1"

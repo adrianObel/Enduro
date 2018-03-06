@@ -16,6 +16,7 @@ const default_configuration = {
 	default_configuration: {
 		project_name: 'Enduro project',
 		project_slug: 'en',
+		token_secret: 'secret_cat',
 		render_templates: true,
 		juicebox_enabled: false,
 		admin_folder: path.join(enduro_local_admin_path, '_generated'),

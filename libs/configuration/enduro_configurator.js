@@ -34,6 +34,9 @@ enduro_configurator.prototype.read_config = function () {
 
 			enduro.config.variables = {}
 
+			// detect jwt secret
+			enduro.config.variables.TOKEN_SECRET = process.env.TOKEN_SECRET || enduro.config.token_secret || 'secret_cat'
+
 			// detect s3
 			enduro.config.variables.has_s3_setup = enduro.config.secret && enduro.config.secret.s3
 			enduro.config.variables.S3_KEY = (enduro.config.variables.has_s3_setup && enduro.config.secret.s3.S3_KEY) || process.env.S3_KEY
