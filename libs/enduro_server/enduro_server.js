@@ -134,7 +134,7 @@ enduro_server.prototype.run = function (server_setup) {
 						throw new Error('user not logged in')
 					})
 					.then((requested_url) => {
-						// only add default file extension is one is not provided
+						// only add default file extension if one is not provided
 						requested_url = /^.*(\..+)$/.test(requested_url) ? requested_url : `${requested_url}.html`
 
 						// serves the requested file
