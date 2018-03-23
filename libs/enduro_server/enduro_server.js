@@ -134,8 +134,11 @@ enduro_server.prototype.run = function (server_setup) {
 						throw new Error('user not logged in')
 					})
 					.then((requested_url) => {
+						// only add default file extension is one is not provided
+						requested_url = /^.*(\..+)$/.test(requested_url) ? requested_url : `${requested_url}.html`
+
 						// serves the requested file
-						res.sendFile(enduro.project_path + '/' + enduro.config.build_folder + requested_url + '.html')
+						res.sendFile(enduro.project_path + '/' + enduro.config.build_folder + requested_url)
 					}, () => {
 						res.sendFile(enduro.config.admin_folder + '/enduro_login/index.html')
 					})

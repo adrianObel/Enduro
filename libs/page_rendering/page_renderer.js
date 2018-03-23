@@ -33,7 +33,7 @@ page_renderer.prototype.render_file = function (template_path, context_path, cul
 	return new Promise(function (resolve, reject) {
 
 		// where will the generated page be saved
-		const destination_path = path.join(culture, dest_path)
+		let destination_path = path.join(culture, dest_path)
 
 		flat.load(context_path)
 			.then((context) => {
@@ -47,8 +47,16 @@ page_renderer.prototype.render_file = function (template_path, context_path, cul
 				// Makes sure the target directory exists
 				flat_helpers.ensure_directory_existence(path.join(enduro.project_path, enduro.config.build_folder, destination_path))
 					.then(function () {
+						let ext = '.html'
+
+						// render sitemap.xml in root of public dir
+						if (template_path.indexOf('sitemap') !== -1) {
+							ext = '.xml'
+							destination_path = 'sitemap'
+						}
+
 						// Attempts to export the template_path
-						fs.writeFile(path.join(enduro.project_path, enduro.config.build_folder, destination_path + '.html'), output, function (err) {
+						fs.writeFile(path.join(enduro.project_path, enduro.config.build_folder, destination_path + ext), output, function (err) {
 							if (err) { return logger.err_block(err) }
 
 							logger.twolog('page ' + destination_path, 'created', 'enduro_render_events')
